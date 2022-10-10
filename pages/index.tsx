@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
+import Home from '../components/home.mdx';
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
     return (
         <div className="container-sm p-5">
-            <h1>Home</h1>
+            <Home />
         </div>
     )
 }
 
-export default Home
+export default HomePage
