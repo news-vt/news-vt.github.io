@@ -6,6 +6,28 @@
 
 // module.exports = nextConfig
 
+import nextMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify';
+import rehypeKatex from 'rehype-katex';
+
+
+const isProd = process.env.NODE_ENV === 'production'
+console.log(`isProd=${isProd} (${process.env.NODE_ENV})`)
+
+
+const withMDX = nextMDX({
+    extension: /\.mdx?$/,
+    options: {
+        remarkPlugins: [remarkGfm, remarkMath, remarkRehype],
+        rehypePlugins: [rehypeStringify, rehypeKatex],
+        // If you use `MDXProvider`, uncomment the following line.
+        providerImportSource: "@mdx-js/react",
+    },
+})
+
 /**
  * @type {import('next').NextConfig}
  */
@@ -16,7 +38,8 @@ const nextConfig = {
         loader: 'akamai',
         path: '',
     },
-    assetPrefix: './',
+    assetPrefix: isProd ? './' : undefined,
+    pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };
 
-export default   nextConfig;
+export default withMDX(nextConfig);
