@@ -5,7 +5,7 @@ import Script from 'next/script';
 import Navbar from '../components/navbar';
 
 // Navbar elements.
-const NAVBAR_TITLE = "MDE Toolkit";
+const NAVBAR_TITLE = "NEWS@VT";
 const NAVBAR_MENU_LIST = [
     { text: "Home", href: "/" },
     { text: "Next.js Home", href: "/nextjshome" },
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
     <>
         <Head>
-            <title>NEWS@VT</title>
+            <title>{NAVBAR_TITLE}</title>
             <meta name="description" content="NEWS@VT website" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/newsvticon.png" />
