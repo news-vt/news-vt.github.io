@@ -9,7 +9,8 @@ const NAVBAR_TITLE = "NEWS@VT";
 const NAVBAR_MENU_LIST = [
     { text: "Home", href: "/" },
     { text: "Next.js Home", href: "/nextjshome" },
-    { text: "MDX Demo", href: "/mdxdemo" },
+    { text: "Blog Demo", href: "/demo/blog" },
+    { text: "Publications Demo", href: "/demo/publications" },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
