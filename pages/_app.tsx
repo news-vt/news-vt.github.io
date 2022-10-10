@@ -9,7 +9,7 @@ const NAVBAR_TITLE = "MDE Toolkit";
 const NAVBAR_MENU_LIST = [
     { text: "Home", href: "/" },
     { text: "Next.js Home", href: "/nextjshome" },
-    { text: "Test MDX", href: "/testmdx" },
+    { text: "MDX Demo", href: "/mdxdemo" },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -22,6 +22,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/newsvticon.png" />
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/github.min.css"/>
+            {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"/> */}
         </Head>
 
         <Navbar title={NAVBAR_TITLE} menu_list={NAVBAR_MENU_LIST}/>
