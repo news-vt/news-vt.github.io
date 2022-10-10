@@ -12,6 +12,7 @@ import remarkMath from 'remark-math';
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify';
 import rehypeKatex from 'rehype-katex';
+import rehypeHighlight from 'rehype-highlight';
 
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -22,7 +23,7 @@ const withMDX = nextMDX({
     extension: /\.mdx?$/,
     options: {
         remarkPlugins: [remarkGfm, remarkMath, remarkRehype],
-        rehypePlugins: [rehypeStringify, rehypeKatex],
+        rehypePlugins: [rehypeStringify, rehypeKatex, rehypeHighlight],
         // If you use `MDXProvider`, uncomment the following line.
         providerImportSource: "@mdx-js/react",
     },
