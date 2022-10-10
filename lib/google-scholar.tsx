@@ -72,7 +72,6 @@ export const fetchAuthorProfileData = async (author_id: string, pagesize: number
         headers: {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
         },
-        mode: 'cors',
     })
 
     // Extract body of response.
