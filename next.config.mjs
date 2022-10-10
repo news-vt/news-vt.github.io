@@ -41,6 +41,14 @@ const nextConfig = {
     },
     assetPrefix: isProd ? './' : undefined,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    async rewrites() {
+        return [
+            {
+            source: '/api/google-scholar/:path*',
+            destination: 'https://scholar.google.com/:path*' // Proxy to Backend
+            },
+        ]
+    },
 };
 
 export default withMDX(nextConfig);
