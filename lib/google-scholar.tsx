@@ -10,6 +10,8 @@ export type Article = {
     link: string;
     authors: string[];
     publication: string;
+    cited_by: string;
+    year: string;
 }
 
 export type Author = {
@@ -46,7 +48,7 @@ export type ProfileData = {
     cited_by: CitedBy;
 }
 
-export const getAuthorProfileData = async (author_id: string, pagesize: number = 10, cstart: number = 0): Promise<ProfileData> => {
+export const fetchAuthorProfileData = async (author_id: string, pagesize: number = 10, cstart: number = 0): Promise<ProfileData> => {
 
     // Setup URL with query parameters.
     const params = new URLSearchParams({
@@ -56,13 +58,15 @@ export const getAuthorProfileData = async (author_id: string, pagesize: number =
         cstart: JSON.stringify(cstart),
         pagesize: JSON.stringify(pagesize),
     });
-    const url = `https://scholar.google.com/citations?${params}`
+    // const url = `https://scholar.google.com/citations?${params}`
+    const url = `/api/google-scholar/citations?${params}`
 
     // Fetch from URL.
     const res = await fetch(url, {
         headers: {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
-        }
+        },
+        mode: 'cors',
     })
 
     // Extract body of response.
@@ -78,12 +82,17 @@ export const getAuthorProfileData = async (author_id: string, pagesize: number =
     }
 
     // Get articles.
-    const articles: Article[] = selector('.gsc_a_t').map((i,elm) => {
+    const sel_art_info = selector('.gsc_a_t');
+    const sel_art_citeby = selector('.gsc_a_c').toArray();
+    const sel_art_year = selector('.gsc_a_y').toArray();
+    const articles: Article[] = sel_art_info.map((i,elm) => {
         const art: Article = {
             title: selector(elm).find('.gsc_a_at').text(),
             link: "https://scholar.google.com" + selector(elm).find(".gsc_a_at").attr("href"),
             authors: selector(elm).find(".gsc_a_at+ .gs_gray").text().split(', '),
-            publication: selector(elm).find(".gs_gray+ .gs_gray").text()
+            publication: selector(elm).find(".gs_gray+ .gs_gray").text(),
+            cited_by: selector(sel_art_citeby[i]).find(".gs_ibl").text(),
+            year: selector(sel_art_year[i]).find(".gs_ibl").text(),
         }
         // Only return elements that have a title element.
         if (art.title !== '') {
