@@ -33,6 +33,12 @@ const withMDX = nextMDX({
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+    serverRuntimeConfig: {
+        GOOGLE_SCHOLAR_URL: "https://scholar.google.com",
+    },
+    publicRuntimeConfig: {
+        GOOGLE_SCHOLAR_URL: isProd ? "https://scholar.google.com" : "/api/google-scholar",
+    },
     reactStrictMode: true,
     swcMinify: true,
     images: {

@@ -4,6 +4,12 @@
  */
 import { load } from 'cheerio'
 
+import getConfig from 'next/config';
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+const GOOGLE_SCHOLAR_URL = serverRuntimeConfig.GOOGLE_SCHOLAR_URL || publicRuntimeConfig.GOOGLE_SCHOLAR_URL;
+console.log(`GOOGLE_SCHOLAR_URL="${GOOGLE_SCHOLAR_URL}"`)
+
 
 export type Article = {
     title: string;
@@ -59,7 +65,7 @@ export const fetchAuthorProfileData = async (author_id: string, pagesize: number
         pagesize: JSON.stringify(pagesize),
     });
     // const url = `https://scholar.google.com/citations?${params}`
-    const url = `/api/google-scholar/citations?${params}`
+    const url = `${GOOGLE_SCHOLAR_URL}/citations?${params}`
 
     // Fetch from URL.
     const res = await fetch(url, {
