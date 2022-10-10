@@ -2,13 +2,14 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head';
 import Script from 'next/script';
-import Navbar from './components/navbar';
+import Navbar from '../components/navbar';
 
 // Navbar elements.
 const NAVBAR_TITLE = "MDE Toolkit";
 const NAVBAR_MENU_LIST = [
     { text: "Home", href: "/" },
     { text: "Next.js Home", href: "/nextjshome" },
+    { text: "Test MDX", href: "/testmdx" },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/newsvticon.png" />
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"/>
         </Head>
 
         <Navbar title={NAVBAR_TITLE} menu_list={NAVBAR_MENU_LIST}/>
