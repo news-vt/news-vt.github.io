@@ -30,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <Navbar title={NAVBAR_TITLE} menu_list={NAVBAR_MENU_LIST}/>
 
-        <Component {...pageProps} />
+        <div className="container-sm p-5">
+            <Component {...pageProps} />
+        </div>
 
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"/>
     </>

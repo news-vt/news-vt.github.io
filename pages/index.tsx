@@ -8,7 +8,7 @@ const HomePage: NextPage = () => {
     }
 
     return (
-        <div className="container-sm p-5">
+        <div>
             <Home />
             <button className="btn btn-success" onClick={ onClick }>Test Alert</button>
         </div>
