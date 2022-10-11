@@ -60,12 +60,13 @@ export default function BibtexDemo({ bibtex }) {
     const renderSource = (source, index) => {
         const nc = new Cite(source);
         const json = nc.format('biblatex', { type: 'object'})[0]
+        console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
         const html = nc.format('bibliography', { 
             lang: 'en-US',
             template: 'apa',
             format: 'html',
         })
-        // console.log(json)
+        console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
         return (
             <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex w-100 justify-content-between">
