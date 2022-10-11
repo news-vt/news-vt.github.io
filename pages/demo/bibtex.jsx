@@ -90,7 +90,7 @@ export default function BibtexDemo({ bibtex }) {
 export async function getStaticProps() {
     return {
         props: {
-            bibtex: fs.readFileSync('/public/references.bib').toString(),
+            bibtex: fs.readFileSync('./public/references.bib').toString(),
         }
     };
 }
