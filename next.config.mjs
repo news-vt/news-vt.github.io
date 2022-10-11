@@ -61,7 +61,6 @@ const nextConfig = {
         GOOGLE_SCHOLAR_URL: isProd ? "https://scholar.google.com" : "/api/google-scholar",
     },
     reactStrictMode: true,
-    swcMinify: true,
     images: {
         loader: 'akamai',
         path: '',
