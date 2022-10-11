@@ -1,6 +1,62 @@
 import { useEffect, useState } from "react";
 import { Article, fetchAuthorProfileData, ProfileData } from "../../lib/google-scholar";
 import { Chart, Bar, Line } from 'react-chartjs-2';
+
+// import {
+//     Chart as ChartJS,
+//     ArcElement,
+//     LineElement,
+//     BarElement,
+//     PointElement,
+//     BarController,
+//     BubbleController,
+//     DoughnutController,
+//     LineController,
+//     PieController,
+//     PolarAreaController,
+//     RadarController,
+//     ScatterController,
+//     CategoryScale,
+//     LinearScale,
+//     LogarithmicScale,
+//     RadialLinearScale,
+//     TimeScale,
+//     TimeSeriesScale,
+//     Decimation,
+//     Filler,
+//     Legend,
+//     Title,
+//     Tooltip,
+//     SubTitle
+//   } from 'chart.js';
+  
+//   ChartJS.register(
+//     ArcElement,
+//     LineElement,
+//     BarElement,
+//     PointElement,
+//     BarController,
+//     BubbleController,
+//     DoughnutController,
+//     LineController,
+//     PieController,
+//     PolarAreaController,
+//     RadarController,
+//     ScatterController,
+//     CategoryScale,
+//     LinearScale,
+//     LogarithmicScale,
+//     RadialLinearScale,
+//     TimeScale,
+//     TimeSeriesScale,
+//     Decimation,
+//     Filler,
+//     Legend,
+//     Title,
+//     Tooltip,
+//     SubTitle
+//   );
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,9 +72,13 @@ import {
     Ticks,
   } from 'chart.js';
 
-// ChartJS.defaults.font = {
-//     family: "Arial",
-// };
+
+// import { Chart as ChartJS, registerables } from 'chart.js';
+// ChartJS.register(...registerables);
+
+// // ChartJS.defaults.font = {
+// //     family: "Arial",
+// // };
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -60,23 +120,10 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
             display: true,
             text: 'Cited by',
           },
+        //   tooltip: {
+        //     enabled: false,
+        //   },
         },
-        // scales: {
-        //     x: { display: true },
-        //     y: { display: true },
-        // },
-        // scales: {
-        //     y: {
-        //         ticks: {
-        //             callback: (value: any, index: number, ticks: any[]) => Ticks.formatters.numeric.apply((this), [value, index, ticks]),
-        //         },
-        //         // ticks: {
-        //         //   callback: (val: any, index: any) => {
-        //         //       return this.getLabelForValue(Number(val));
-        //         //   },
-        //         // }
-        //     }
-        // },
       };
     const chart_labels = authorProfileData.cited_by.graph.map((item, index) => item.year)
     // const chart_labels = [0]
@@ -128,9 +175,9 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
         <div>
             <h1>Citation Statistics</h1>
             {/* <Bar data={chart_data} options={chart_options} /> */}
-            {/* <Bar datasetIdKey='id' data={chart_data} /> */}
+            <Bar datasetIdKey='id' data={chart_data} options={chart_options} />
             {/* <Chart type='bar' data={chart_data} /> */}
-            <Line
+            {/* <Line
                 datasetIdKey='id'
                 data={{
                     labels: ['Jun', 'Jul', 'Aug'],
@@ -147,7 +194,7 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
                     },
                     ],
                 }}
-                />
+                /> */}
         </div>
         <div>
             <h1>Google Scholar Articles for {authorProfileData?.author.name} ({authorProfileData?.articles.length} total)</h1>
