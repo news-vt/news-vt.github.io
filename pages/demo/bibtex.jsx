@@ -40,7 +40,7 @@ export default function BibtexDemo({ bibtex }) {
             type: 'text',
             lang: 'en-US',
             template: 'apa',
-            format: 'html',
+            // format: 'html',
         })
         console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
         return (
