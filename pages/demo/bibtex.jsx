@@ -61,7 +61,7 @@ export default function BibtexDemo({ bibtex }) {
     }
 
     const renderSource = (source, index) => {
-        const nc = new Cite(source);
+        const nc = new Cite([source]);
         const json = nc.format('biblatex', { type: 'object'})[0]
         console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
         try {
