@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import { Article, fetchAuthorProfileData, ProfileData } from "../../lib/google-scholar";
 
 
+type PublicationsDemoProps = {
+    authorProfileData: ProfileData;
+}
 
-export default function Publications() {
+export default function PublicationsDemo({ authorProfileData }: PublicationsDemoProps) {
 
-    const [authorProfileData, setAuthorProfileData] = useState<ProfileData>();
-
-    useEffect(() => {
-        const getAuthorProfileData = async () => {
-            const apd = await fetchAuthorProfileData('kYDNA0UAAAAJ');
-            setAuthorProfileData(apd);
-        }
-        getAuthorProfileData();
-    }, []);
+    // TODO fetching from client causes CORS error.
+    // const [authorProfileData, setAuthorProfileData] = useState<ProfileData>();
+    // useEffect(() => {
+    //     const getAuthorProfileData = async () => {
+    //         const apd = await fetchAuthorProfileData('kYDNA0UAAAAJ');
+    //         setAuthorProfileData(apd);
+    //     }
+    //     getAuthorProfileData();
+    // }, []);
 
     const renderArticle = (article: Article, key: any) => {
         return (<a key={key} href={article.link} className="list-group-item list-group-item-action flex-column align-items-start">
@@ -34,4 +37,13 @@ export default function Publications() {
             </div>
         </div>
     );
+}
+
+export async function getStaticProps() {
+    const authorProfileData = await fetchAuthorProfileData('kYDNA0UAAAAJ'); // Walid Saad.
+    return {
+        props: {
+            authorProfileData: authorProfileData,
+        }
+    };
 }
