@@ -61,17 +61,21 @@ export default function BibtexDemo({ bibtex }) {
         const nc = new Cite(source);
         const json = nc.format('biblatex', { type: 'object'})[0]
         console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
-        const html = nc.format('bibliography', { 
-            lang: 'en-US',
-            template: 'apa',
-            format: 'html',
-        })
-        console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
+        try {
+            const html = nc.format('bibliography', { 
+                lang: 'en-US',
+                template: 'apa',
+                format: 'html',
+            })
+            console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
+        } catch (error) {
+            console.log(error)
+        }
         return (
             <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex w-100 justify-content-between">
                     <h3 className="m-3">{index}</h3>
-                    <div dangerouslySetInnerHTML={{ __html: html }}></div>
+                    {/* <div dangerouslySetInnerHTML={{ __html: html }}></div> */}
                     <a className="p-3" href="#" onClick={() => downloadSource(index)}>BibLaTeX</a>
                 </div>
         </div>
