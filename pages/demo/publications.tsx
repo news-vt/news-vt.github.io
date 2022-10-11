@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react";
 import { Article, fetchAuthorProfileData, ProfileData } from "../../lib/google-scholar";
+import { Chart, Bar, Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
     BarElement,
+    LineElement,
+    LineController,
+    BarController,
     Title,
     Tooltip,
     Legend,
+    Ticks,
   } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
 
 // ChartJS.defaults.font = {
-//     family: "Segoe UI",
+//     family: "Arial",
 // };
 ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
     BarElement,
+    LineElement,
+    LineController,
+    BarController,
     Title,
     Tooltip,
     Legend
@@ -43,7 +50,7 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
     // }, []);
 
     const chart_options = {
-        // responsive: true,
+        responsive: true,
         plugins: {
           legend: {
             position: 'top' as const,
@@ -54,14 +61,35 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
             text: 'Cited by',
           },
         },
+        // scales: {
+        //     x: { display: true },
+        //     y: { display: true },
+        // },
+        // scales: {
+        //     y: {
+        //         ticks: {
+        //             callback: (value: any, index: number, ticks: any[]) => Ticks.formatters.numeric.apply((this), [value, index, ticks]),
+        //         },
+        //         // ticks: {
+        //         //   callback: (val: any, index: any) => {
+        //         //       return this.getLabelForValue(Number(val));
+        //         //   },
+        //         // }
+        //     }
+        // },
       };
     const chart_labels = authorProfileData.cited_by.graph.map((item, index) => item.year)
+    // const chart_labels = [0]
     const chart_data = {
         labels: chart_labels,
         datasets: [{
             label: "Cited By",
             // display: false,
-            data: authorProfileData.cited_by.graph.map((item, index) => item.citations),
+            // data: [5],
+            data: authorProfileData.cited_by.graph.map((item, index) => ({
+                x: item.year,//item.year.toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 2}),//.toLocaleString('en-us'),
+                y: item.citations,//item.citations.toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 2}),//.toLocaleString('en-us'),
+            })),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -78,7 +106,7 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
               ],
-              borderWidth: 1,
+            //   borderWidth: 1,
         }],
     };
 
@@ -99,7 +127,27 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
         <>
         <div>
             <h1>Citation Statistics</h1>
-            <Bar data={chart_data} options={chart_options}/>
+            {/* <Bar data={chart_data} options={chart_options} /> */}
+            {/* <Bar datasetIdKey='id' data={chart_data} /> */}
+            {/* <Chart type='bar' data={chart_data} /> */}
+            <Line
+                datasetIdKey='id'
+                data={{
+                    labels: ['Jun', 'Jul', 'Aug'],
+                    datasets: [
+                    {
+                        // id: 1,
+                        label: '',
+                        data: [5, 6, 7],
+                    },
+                    {
+                        // id: 2,
+                        label: '',
+                        data: [3, 2, 1],
+                    },
+                    ],
+                }}
+                />
         </div>
         <div>
             <h1>Google Scholar Articles for {authorProfileData?.author.name} ({authorProfileData?.articles.length} total)</h1>
