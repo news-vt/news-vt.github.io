@@ -52,7 +52,7 @@ const withMDX = nextMDX({
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-    swcMinify: false,
+    swcMinify: true,
     compress: false,
     serverRuntimeConfig: {
         GOOGLE_SCHOLAR_URL: "https://scholar.google.com",
