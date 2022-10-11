@@ -64,6 +64,7 @@ export default function BibtexDemo({ bibtex }) {
         try {
             console.log(`[${index}] NC: ${JSON.stringify(nc)}`)
             const html = nc.format('bibliography', { 
+                type: 'text',
                 lang: 'en-US',
                 template: 'apa',
                 format: 'html',
