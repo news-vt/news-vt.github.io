@@ -22,19 +22,20 @@ const isGithubActions = process.env.GITHUB_ACTIONS || false
 console.log(`isGithubActions=${isGithubActions} (${process.env.GITHUB_ACTIONS})`)
 
 let assetPrefix = undefined
-// let assetPrefix = ''
+// let assetPrefix = './'
+// let assetPrefix = './'
 // let basePath = '/'
 let basePath = undefined
 
-if (isGithubActions) {
-  // trim off `<owner>/`
-  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
+// if (isGithubActions) {
+//   // trim off `<owner>/`
+//   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
 
-  assetPrefix = `/${repo}/`
-//   basePath = `/${repo}`
-}
+//   assetPrefix = `/${repo}/`
+// //   basePath = `/${repo}`
+// }
 
-console.log(`basePath: ${basePath}`)
+// console.log(`basePath: ${basePath}`)
 
 
 const withMDX = nextMDX({
