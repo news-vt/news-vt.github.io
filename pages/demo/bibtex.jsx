@@ -77,11 +77,14 @@ export default function BibtexDemo({ bibtex }) {
         );
     }
 
+    console.log(`typeof bib: ${typeof bib}`)
+    console.log(`bib.data: ${JSON.stringify(bib.data)}`)
+
     return (
         <div className="m-5">
             <h1>BibTex Demo</h1>
             <div className="list-group">
-                {bib.data.map(renderSource)}
+                {(typeof bib !== 'undefined') ? bib.data.map(renderSource) : null}
             </div>
         </div>
     );
