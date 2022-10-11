@@ -18,6 +18,20 @@ import rehypeHighlight from 'rehype-highlight';
 const isProd = process.env.NODE_ENV === 'production'
 console.log(`isProd=${isProd} (${process.env.NODE_ENV})`)
 
+const isGithubActions = process.env.GITHUB_ACTIONS || false
+console.log(`isProd=${isGithubActions} (${process.env.GITHUB_ACTIONS})`)
+
+let assetPrefix = ''
+let basePath = '/'
+
+if (isGithubActions) {
+  // trim off `<owner>/`
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
+
+  assetPrefix = `/${repo}/`
+  basePath = `/${repo}`
+}
+
 
 const withMDX = nextMDX({
     extension: /\.mdx?$/,
@@ -45,7 +59,9 @@ const nextConfig = {
         loader: 'akamai',
         path: '',
     },
-    assetPrefix: isProd ? './' : undefined,
+    // assetPrefix: isProd ? './' : undefined,
+    assetPrefix: assetPrefix,
+    basePath: basePath,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     async rewrites() {
         return [
