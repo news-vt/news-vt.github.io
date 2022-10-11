@@ -36,12 +36,15 @@ export default function BibtexDemo({ bibtex }) {
         const nc = new Cite([source]);
         const json = nc.format('biblatex', { type: 'object'})[0]
         console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
-        const html = nc.format('bibliography', { 
-            type: 'text',
-            lang: 'en-US',
-            template: 'apa',
-            // format: 'html',
-        })
+
+        // TODO there is a problem with this `format()` function specifically with the `bibliography` format (TypeError: Cannot read properties of undefined (reading 'slice')).
+        // const html = nc.format('bibliography', { 
+        //     type: 'text',
+        //     lang: 'en-US',
+        //     template: 'apa',
+        //     // format: 'html',
+        // })
+        const html = JSON.stringify(json)
         console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
         return (
             <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
