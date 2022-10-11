@@ -22,7 +22,7 @@ const isGithubActions = process.env.GITHUB_ACTIONS || false
 console.log(`isProd=${isGithubActions} (${process.env.GITHUB_ACTIONS})`)
 
 let assetPrefix = ''
-let basePath = '/'
+// let basePath = '/'
 
 if (isGithubActions) {
   // trim off `<owner>/`
@@ -61,7 +61,7 @@ const nextConfig = {
     },
     // assetPrefix: isProd ? './' : undefined,
     assetPrefix: assetPrefix,
-    basePath: basePath,
+    // basePath: basePath,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     async rewrites() {
         return [
