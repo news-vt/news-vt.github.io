@@ -11,6 +11,7 @@ const NAVBAR_MENU_LIST = [
     { text: "Next.js Home", href: "/nextjshome" },
     { text: "Blog Demo", href: "/demo/blog" },
     { text: "Publications Demo", href: "/demo/publications" },
+    { text: "BibTex Demo", href: "/demo/bibtex" },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
