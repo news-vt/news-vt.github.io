@@ -44,7 +44,7 @@ export default function BibtexDemo({ bibtex }) {
         //     template: 'apa',
         //     // format: 'html',
         // })
-        const html = JSON.stringify(json)
+        const html = `<pre style="white-space: pre-wrap;">`+JSON.stringify(json, null, 4)+"</pre>"
         console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
         return (
             <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
