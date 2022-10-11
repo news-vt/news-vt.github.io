@@ -1,62 +1,6 @@
 import { useEffect, useState } from "react";
 import { Article, fetchAuthorProfileData, ProfileData } from "../../lib/google-scholar";
 import { Chart, Bar, Line } from 'react-chartjs-2';
-
-// import {
-//     Chart as ChartJS,
-//     ArcElement,
-//     LineElement,
-//     BarElement,
-//     PointElement,
-//     BarController,
-//     BubbleController,
-//     DoughnutController,
-//     LineController,
-//     PieController,
-//     PolarAreaController,
-//     RadarController,
-//     ScatterController,
-//     CategoryScale,
-//     LinearScale,
-//     LogarithmicScale,
-//     RadialLinearScale,
-//     TimeScale,
-//     TimeSeriesScale,
-//     Decimation,
-//     Filler,
-//     Legend,
-//     Title,
-//     Tooltip,
-//     SubTitle
-//   } from 'chart.js';
-  
-//   ChartJS.register(
-//     ArcElement,
-//     LineElement,
-//     BarElement,
-//     PointElement,
-//     BarController,
-//     BubbleController,
-//     DoughnutController,
-//     LineController,
-//     PieController,
-//     PolarAreaController,
-//     RadarController,
-//     ScatterController,
-//     CategoryScale,
-//     LinearScale,
-//     LogarithmicScale,
-//     RadialLinearScale,
-//     TimeScale,
-//     TimeSeriesScale,
-//     Decimation,
-//     Filler,
-//     Legend,
-//     Title,
-//     Tooltip,
-//     SubTitle
-//   );
-
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -70,15 +14,7 @@ import {
     Tooltip,
     Legend,
     Ticks,
-  } from 'chart.js';
-
-
-// import { Chart as ChartJS, registerables } from 'chart.js';
-// ChartJS.register(...registerables);
-
-// // ChartJS.defaults.font = {
-// //     family: "Arial",
-// // };
+} from 'chart.js';
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -112,30 +48,24 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
     const chart_options = {
         responsive: true,
         plugins: {
-          legend: {
-            position: 'top' as const,
-            display: false,
-          },
-          title: {
-            display: true,
-            text: 'Cited by',
-          },
-        //   tooltip: {
-        //     enabled: false,
-        //   },
+            legend: {
+                position: 'top' as const,
+                display: false,
+            },
+            title: {
+                display: true,
+                text: 'Cited by',
+            },
         },
       };
     const chart_labels = authorProfileData.cited_by.graph.map((item, index) => item.year)
-    // const chart_labels = [0]
     const chart_data = {
         labels: chart_labels,
         datasets: [{
             label: "Cited By",
-            // display: false,
-            // data: [5],
             data: authorProfileData.cited_by.graph.map((item, index) => ({
-                x: item.year,//item.year.toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 2}),//.toLocaleString('en-us'),
-                y: item.citations,//item.citations.toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 2}),//.toLocaleString('en-us'),
+                x: item.year,
+                y: item.citations,
             })),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -174,27 +104,7 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
         <>
         <div>
             <h1>Citation Statistics</h1>
-            {/* <Bar data={chart_data} options={chart_options} /> */}
             <Bar datasetIdKey='id' data={chart_data} options={chart_options} />
-            {/* <Chart type='bar' data={chart_data} /> */}
-            {/* <Line
-                datasetIdKey='id'
-                data={{
-                    labels: ['Jun', 'Jul', 'Aug'],
-                    datasets: [
-                    {
-                        // id: 1,
-                        label: '',
-                        data: [5, 6, 7],
-                    },
-                    {
-                        // id: 2,
-                        label: '',
-                        data: [3, 2, 1],
-                    },
-                    ],
-                }}
-                /> */}
         </div>
         <div>
             <h1>Google Scholar Articles for {authorProfileData?.author.name} ({authorProfileData?.articles.length} total)</h1>
