@@ -1,49 +1,18 @@
-// Register plugin.
+// Register plugins.
 require('@citation-js/plugin-bibtex')
+require('@citation-js/plugin-csl')
 
-// import Cite from 'citation-js'
+// Description of output formats: https://github.com/larsgw/citation.js/blob/main/docs/output_formats.md
 import {Cite} from '@citation-js/core'
+
 import fs from 'fs'
 
 
 export default function BibtexDemo({ bibtex }) {
+
+    // Generate bibliography from BibTex file contents.
     const bib = new Cite(bibtex);
 
-
-
-    // Format as JSON object.
-    // const json = bib.format('bibtex', { type: 'object'})
-    // const json = bib.format('biblatex', { type: 'object'})
-    // console.log(JSON.stringify(json))
-
-    // console.log(JSON.stringify(bib.data))
-
-    // // Iterate over all bibliography elements and print each one as HTML.
-    // bib.data.map((src, index) => {
-    //     // console.log(typeof src)
-    //     console.log((new Cite(src)).format('bibliography', { 
-    //         lang: 'en-US',
-    //         template: 'ieee',
-    //         format: 'html',
-    //     }))
-    // })
-
-    // // Format as BibTex text string.
-    // console.log(bib.format('bibtex', { type: 'text'}))
-
-    // // Format as BibLaTeX text string.
-    // console.log(bib.format('biblatex', { type: 'text'}))
-
-    // // Format as HTML string.
-    // console.log(bib.format('bibliography', { 
-    //     lang: 'en-US',
-    //     template: 'ieee',
-    //     format: 'html',
-    // }))
-
-    // bib.toArray().map((source, index) => {
-    //     console.log(JSON.stringify(source));
-    // })
 
     const downloadSource = (index) => {
 
@@ -65,25 +34,19 @@ export default function BibtexDemo({ bibtex }) {
         const nc = new Cite([source]);
         const json = nc.format('biblatex', { type: 'object'})[0]
         console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
-        try {
-            console.log(`[${index}] NC: ${JSON.stringify(nc)}`)
-            // const html = nc.format('bibliography', { 
-            const html = nc.format('biblatex', { 
-                // type: 'text',
-                lang: 'en-US',
-                template: 'apa',
-                format: 'html',
-            })
-            console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
-        } catch (error) {
-            console.log(error)
-        }
+        const html = nc.format('bibliography', { 
+            lang: 'en-US',
+            template: 'apa',
+            format: 'html',
+        })
+        console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
         return (
             <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex w-100 justify-content-between">
-                    <h3 className="m-3">{index}</h3>
-                    {/* <div dangerouslySetInnerHTML={{ __html: html }}></div> */}
+                    <h3 className="m-3">[{index+1}]</h3>
+                    <div dangerouslySetInnerHTML={{ __html: html }}></div>
                     <a className="p-3" href="#" onClick={() => downloadSource(index)}>BibLaTeX</a>
+                    <a className="p-3" href={json.properties.url}>URL</a>
                 </div>
         </div>
         );
