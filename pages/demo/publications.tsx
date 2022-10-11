@@ -11,7 +11,10 @@ import {
     Legend,
   } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-  
+
+// ChartJS.defaults.font = {
+//     family: "Segoe UI",
+// };
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -40,7 +43,7 @@ export default function PublicationsDemo({ authorProfileData }: PublicationsDemo
     // }, []);
 
     const chart_options = {
-        responsive: true,
+        // responsive: true,
         plugins: {
           legend: {
             position: 'top' as const,
