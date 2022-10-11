@@ -1,16 +1,20 @@
 // Register plugins.
 // require('@citation-js/plugin-bibtex')
 // require('@citation-js/plugin-csl')
-import PluginCSL from '@citation-js/plugin-csl'
-import PluginBibtex from '@citation-js/plugin-bibtex'
+// import PluginCSL from '@citation-js/plugin-csl'
+// import PluginBibtex from '@citation-js/plugin-bibtex'
 
 // Description of output formats: https://github.com/larsgw/citation.js/blob/main/docs/output_formats.md
-import {Cite} from '@citation-js/core'
+// import {Cite} from '@citation-js/core'
 
 import fs from 'fs'
 
 
 export default function BibtexDemo({ bibtex }) {
+
+    require('@citation-js/plugin-bibtex')
+    require('@citation-js/plugin-csl')
+    const Cite = require('@citation-js/core');
 
     // Generate bibliography from BibTex file contents.
     const bib = new Cite(bibtex);
