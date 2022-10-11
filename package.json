@@ -12,6 +12,7 @@
   "dependencies": {
     "@citation-js/core": "^0.6.1",
     "@citation-js/plugin-bibtex": "^0.6.1",
+    "@citation-js/plugin-csl": "^0.6.4",
     "@mdx-js/loader": "^2.1.4",
     "@mdx-js/react": "^2.1.4",
     "@next/mdx": "^12.3.1",
