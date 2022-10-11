@@ -1,7 +1,8 @@
 // Register plugin.
 require('@citation-js/plugin-bibtex')
 
-import Cite from 'citation-js'
+// import Cite from 'citation-js'
+import {Cite} from '@citation-js/core'
 import fs from 'fs'
 
 
@@ -66,9 +67,10 @@ export default function BibtexDemo({ bibtex }) {
         console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
         try {
             console.log(`[${index}] NC: ${JSON.stringify(nc)}`)
-            const html = nc.format('bibliography', { 
+            // const html = nc.format('bibliography', { 
+            const html = nc.format('biblatex', { 
                 // type: 'text',
-                // lang: 'en-US',
+                lang: 'en-US',
                 template: 'apa',
                 format: 'html',
             })
