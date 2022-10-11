@@ -1,20 +1,16 @@
 // Register plugins.
 // require('@citation-js/plugin-bibtex')
 // require('@citation-js/plugin-csl')
-// import PluginCSL from '@citation-js/plugin-csl'
-// import PluginBibtex from '@citation-js/plugin-bibtex'
+import PluginCSL from '@citation-js/plugin-csl'
+import PluginBibtex from '@citation-js/plugin-bibtex'
 
 // Description of output formats: https://github.com/larsgw/citation.js/blob/main/docs/output_formats.md
-// import {Cite} from '@citation-js/core'
+import {Cite} from '@citation-js/core'
 
 import fs from 'fs'
 
 
 export default function BibtexDemo({ bibtex }) {
-
-    require('@citation-js/plugin-bibtex')
-    require('@citation-js/plugin-csl')
-    const Cite = require('@citation-js/core');
 
     // Generate bibliography from BibTex file contents.
     const bib = new Cite(bibtex);
@@ -36,27 +32,27 @@ export default function BibtexDemo({ bibtex }) {
         element.click();
     }
 
-    const renderSource = (source, index) => {
-        const nc = new Cite([source]);
-        const json = nc.format('biblatex', { type: 'object'})[0]
-        console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
-        const html = nc.format('bibliography', { 
-            lang: 'en-US',
-            template: 'apa',
-            format: 'html',
-        })
-        console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
-        return (
-            <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
-                <div className="d-flex w-100 justify-content-between">
-                    <h3 className="m-3">[{index+1}]</h3>
-                    <div dangerouslySetInnerHTML={{ __html: html }}></div>
-                    <a className="p-3" href="#" onClick={() => downloadSource(index)}>BibLaTeX</a>
-                    <a className="p-3" href={json.properties.url}>URL</a>
-                </div>
-        </div>
-        );
-    }
+    // const renderSource = (source, index) => {
+    //     const nc = new Cite([source]);
+    //     const json = nc.format('biblatex', { type: 'object'})[0]
+    //     console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
+    //     const html = nc.format('bibliography', { 
+    //         lang: 'en-US',
+    //         template: 'apa',
+    //         format: 'html',
+    //     })
+    //     console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
+    //     return (
+    //         <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
+    //             <div className="d-flex w-100 justify-content-between">
+    //                 <h3 className="m-3">[{index+1}]</h3>
+    //                 <div dangerouslySetInnerHTML={{ __html: html }}></div>
+    //                 <a className="p-3" href="#" onClick={() => downloadSource(index)}>BibLaTeX</a>
+    //                 <a className="p-3" href={json.properties.url}>URL</a>
+    //             </div>
+    //     </div>
+    //     );
+    // }
 
     console.log(`typeof bib: ${typeof bib}`)
     console.log(`bib.data: ${JSON.stringify(bib.data)}`)
@@ -65,7 +61,27 @@ export default function BibtexDemo({ bibtex }) {
         <div className="m-5">
             <h1>BibTex Demo</h1>
             <div className="list-group">
-                {(typeof bib !== 'undefined') ? bib.data.map(renderSource) : null}
+                {(typeof bib !== 'undefined') ? bib.data.map((source, index) => {
+                    const nc = new Cite([source]);
+                    const json = nc.format('biblatex', { type: 'object'})[0]
+                    console.log(`[${index}] JSON: ${JSON.stringify(json)}`)
+                    const html = nc.format('bibliography', { 
+                        lang: 'en-US',
+                        template: 'apa',
+                        format: 'html',
+                    })
+                    console.log(`[${index}] HTML: ${JSON.stringify(html)}`)
+                    return (
+                        <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
+                            <div className="d-flex w-100 justify-content-between">
+                                <h3 className="m-3">[{index+1}]</h3>
+                                <div dangerouslySetInnerHTML={{ __html: html }}></div>
+                                <a className="p-3" href="#" onClick={() => downloadSource(index)}>BibLaTeX</a>
+                                <a className="p-3" href={json.properties.url}>URL</a>
+                            </div>
+                    </div>
+                    );
+                }) : null}
             </div>
         </div>
     );
