@@ -19,10 +19,12 @@ const isProd = process.env.NODE_ENV === 'production'
 console.log(`isProd=${isProd} (${process.env.NODE_ENV})`)
 
 const isGithubActions = process.env.GITHUB_ACTIONS || false
-console.log(`isProd=${isGithubActions} (${process.env.GITHUB_ACTIONS})`)
+console.log(`isGithubActions=${isGithubActions} (${process.env.GITHUB_ACTIONS})`)
 
-let assetPrefix = ''
-let basePath = '/'
+let assetPrefix = undefined
+// let assetPrefix = ''
+// let basePath = '/'
+let basePath = undefined
 
 if (isGithubActions) {
   // trim off `<owner>/`
@@ -31,6 +33,8 @@ if (isGithubActions) {
   assetPrefix = `/${repo}/`
   basePath = `/${repo}`
 }
+
+console.log(`basePath: ${basePath}`)
 
 
 const withMDX = nextMDX({

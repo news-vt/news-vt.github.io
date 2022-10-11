@@ -65,7 +65,7 @@ export default function BibtexDemo({ bibtex }) {
             template: 'apa',
             format: 'html',
         })
-        console.log(json)
+        // console.log(json)
         return (
             <div key={index} href={json.properties.url} className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex w-100 justify-content-between">
@@ -90,7 +90,7 @@ export default function BibtexDemo({ bibtex }) {
 export async function getStaticProps() {
     return {
         props: {
-            bibtex: fs.readFileSync('./public/references.bib').toString(),
+            bibtex: fs.readFileSync('public/references.bib').toString(),
         }
     };
 }
